@@ -1,37 +1,27 @@
-#include<iostream>
-#include "alloc.h"
+#include "name.h"
 
-using namespace std;
+void Beg() {
+    std::cout << "begin"<<endl;
+}
 
+void End() {
+    std::cout << "end" <<endl;
+}
+
+void Numbers(int n) {
+    std::cout << n << "- numbers" <<endl;
+}
+
+void Letters(const string& n) {
+    std::cout << n << "- string"<<endl;
+}
 int main()
 {
-	bool test = true;
-	makeAllocator(sizeof(int) *8);
-	int* i1 = (int*)alloc(sizeof(int)*4);
-	int* i2 = (int*)alloc(sizeof(int)*4);
-	*i1 = 10;
-	*i2 = 20;
-	test = ((*i1 + *i2) == 30);
-	if (test)
-	{
-		cout << "Excellent"<<endl;
-	}
-	else
-	{
-		cout << "Error in the firts test"<<endl;
-	}
-	reset();
-	makeAllocator(sizeof(char) * 8);
-	char* j1 = (char*)alloc(sizeof(char)*4);
-	char* j2 = (char*)alloc(sizeof(char) * 4);
-	char* j3 = (char*)alloc(sizeof(char));
-	if (j3 == nullptr)
-	{
-		cout << "Excellent" << endl;
-	}
-	else
-	{
-		cout << "Error in the second test" << endl;
-	}
+    initial_callback(Numbers, Letters, Beg, End);
+    cout << "test1:" << endl;
+	parser("1456 234   Hello\nWorld\n222 Ptr\t End(");
+    cout << "test2:" << endl;
+    parser("\n\n\n\t\t\t\n");
+
 
 }

@@ -1,13 +1,15 @@
-all: allocate
+all: pars
 
-allocate : allocator.o test.o
-		g++ - o allocate allocator.o test.o
+pars : parser.o test.o
+		g++ - o pars parser.o test.o
 
-allocator.o : allocator.cpp alloc.h
-g++ - c allocator.cpp
+parser.o : parser.cpp name.h
+g++ - c parser.cpp
 
-test.o : test.cpp alloc.h
+test.o : test.cpp name.h
 g++ - c test.cpp
 
 clean :
-rm - rf * .o allocate
+rm - rf * .o pars
+
+
