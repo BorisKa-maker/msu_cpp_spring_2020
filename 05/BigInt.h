@@ -14,9 +14,9 @@ public:
 	BigInt(BigInt&& A);
 	BigInt& operator=(BigInt&& A);
 	BigInt& operator=(const BigInt& A);
-	BigInt abs_plus(const BigInt& A, const BigInt& B);
-	BigInt abs_minus(const BigInt& A, const BigInt& B);
-	BigInt& operator-();
+	void abs_plus(const BigInt& A, const BigInt& B);
+	void abs_minus(const BigInt& A, const BigInt& B);
+	BigInt operator-();
 	BigInt operator+(const BigInt& A) const;
 	BigInt operator-(const BigInt& A) const;
 	bool operator>(const BigInt& A) const;
@@ -27,6 +27,7 @@ public:
 	bool operator!=(const BigInt& A) const;
 	size_t getLen() const;
 	friend std::ostream& operator<< (std::ostream& out, const BigInt& point);
-	
+	friend std::ostream& operator<< (std::ostream& out, const BigInt&& point);
 	~BigInt();
 };
+
