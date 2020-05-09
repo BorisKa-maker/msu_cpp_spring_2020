@@ -15,6 +15,7 @@ BigInt::BigInt(const int64_t& A)
 	uint64_t new_nam = (sign) ? A : (-1) * A;
 	uint64_t nam = new_nam;
 	Len = 0;
+	Data = nullptr;
 	while (nam != 0)
 	{
 		nam /= 10;
@@ -53,6 +54,7 @@ BigInt& BigInt::operator=(BigInt&& A)
 		return *this;
 	}
 	delete[] Data;
+	Data = nullptr;
 	Len = A.Len;
 	sign = A.sign;
 	Data = A.Data;
@@ -85,6 +87,16 @@ BigInt::~BigInt()
 	Data = nullptr;
 }
 
+std::ostream& operator<< (std::ostream& out, const BigInt&& point)
+{
+	const char* s = (point.sign) ? "" : "-";
+	out << s;
+	for (size_t i = 0; i < point.Len; i++)
+	{
+		out << point.Data[point.Len - i - 1];
+	}
+	return out;
+}
 
 
 BigInt::BigInt(const BigInt& A)
@@ -218,7 +230,7 @@ bool BigInt::operator<=(const BigInt& A) const
 
 
 
-BigInt BigInt::abs_plus(const BigInt& A, const BigInt& B)
+void BigInt::abs_plus(const BigInt& A, const BigInt& B)
 {
 	Len = (A.Len > B.Len) ? A.Len + 1 : B.Len + 1;
 	sign = true;
@@ -259,10 +271,9 @@ BigInt BigInt::abs_plus(const BigInt& A, const BigInt& B)
 	}
 	delete[] ptr;
 	ptr = nullptr;
-	return *this;
 }
 
-BigInt BigInt::abs_minus(const BigInt& A, const BigInt& B)
+void BigInt::abs_minus(const BigInt& A, const BigInt& B)
 {
 	Len = A.Len;
 	sign = true;
@@ -313,9 +324,7 @@ BigInt BigInt::abs_minus(const BigInt& A, const BigInt& B)
 	}
 	delete[] ptr;
 	ptr = nullptr;
-	return *this;
 
-	return *this;
 }
 
 size_t BigInt::getLen() const
@@ -323,16 +332,16 @@ size_t BigInt::getLen() const
 	return Len;
 }
 
-BigInt& BigInt::operator-()
-{	
+BigInt BigInt::operator-()
+{
+	BigInt B(*this);
+	//std::cout << B;
 	if (Len == 1 && Data[0] == 0)
 	{
-		//std::cout << "FTF";
-		return *this;
+		return B;
 	}
-	sign = !sign;
-	//std::cout << *this;
-	return *this;
+	B.sign = !B.sign;
+	return B;
 }
 
 BigInt BigInt::operator+(const BigInt& A) const
@@ -340,13 +349,15 @@ BigInt BigInt::operator+(const BigInt& A) const
 	BigInt B;
 	if (sign && A.sign)
 	{
-		BigInt K = A;
+		BigInt K(A);
 		B.abs_plus(*this, K);
+		delete[] K.Data;
+		K.Data = nullptr;
 		//std::cout << B << std::endl;
 	}
 	else if (sign && !A.sign)
 	{	
-		BigInt K = A;
+		BigInt K(A);
 		if (*this >= -K)
 		{
 			B.abs_minus(*this, K);
@@ -356,10 +367,12 @@ BigInt BigInt::operator+(const BigInt& A) const
 			B.abs_minus(K, *this);
 			B.sign = false;
 		}
+		delete[] K.Data;
+		K.Data = nullptr;
 	}
 	else if (!sign && A.sign)
 	{
-		BigInt K = *this;
+		BigInt K(*this);
 		if (A >= -K)
 		{
 			B.abs_minus(A, K);
@@ -369,6 +382,8 @@ BigInt BigInt::operator+(const BigInt& A) const
 			B.abs_minus(K, A);
 			B.sign = false;
 		}
+		delete[] K.Data;
+		K.Data = nullptr;
 
 	}
 	else
