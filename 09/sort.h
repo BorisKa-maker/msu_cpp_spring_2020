@@ -46,7 +46,7 @@ void sort(std::mutex& mutex, std::ifstream& input, std::ofstream& tmp, size_t bu
 
 void mysort(const std::string& input_path, const std::string& output_path)
 {
-    size_t buf_size = 51200;
+    size_t buf_size = 8000000;
 
     std::ifstream input(input_path, std::ios::binary);
     std::ofstream output(output_path, std::ios::binary);
