@@ -36,7 +36,7 @@ int main()
             file.read((char*)&t, sizeof(uint64_t));
             file.read((char*)&t1, sizeof(uint64_t));
             //cout << t << ' ' << t1 << endl;
-            assert(t <= t1 || pow(t1 - t, 2) < 0.001);
+            assert(t <= t1);
         }
         file.close();
         cout << "Ok\n";
@@ -73,7 +73,7 @@ int main()
             file.read((char*)&t, sizeof(uint64_t));
             file.read((char*)&t1, sizeof(uint64_t));
             //cout << t << ' ' << t1 << endl;
-            assert(t <= t1 || pow(t1-t,2)<0.001);
+            assert(t <= t1);
         }
         file.close();
         cout << "Ok\n";
