@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-    size_t TrueCount = 10000000;
+    size_t Size = 10000000;
     ofstream ofile;
     uint64_t t;
     uint64_t t1;
@@ -21,7 +21,7 @@ int main()
         return 0;
     }
 
-    for (uint64_t i = 0; i < TrueCount; i++)
+    for (uint64_t i = 0; i < Size; i++)
     {
         uint64_t r = rand();
         ofile.write((char*)&r, sizeof(uint64_t));
@@ -33,7 +33,7 @@ int main()
         mysort("bin.dat", "out.dat");
 
         file.open("out.dat", ios::binary);
-        for (uint64_t i = 0; i < TrueCount/2; ++i)
+        for (uint64_t i = 0; i < Size/2; ++i)
         {
             file.read((char*)&t, sizeof(uint64_t));
             file.read((char*)&t1, sizeof(uint64_t));
