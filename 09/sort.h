@@ -100,17 +100,17 @@ void mysort(const std::string& input_path, const std::string& output_path)
         {
             break;
         }
-        auto smallest = queue.top();
+        auto star = queue.top();
         queue.pop();
 
-        output.write((char*)&(smallest.val), sizeof(uint64_t));
-        if (smallest.pos >= smallest.max)
+        output.write((char*)&(star.val), sizeof(uint64_t));
+        if (star.pos >= star.max)
             continue;
 
-        input.seekg(smallest.pos);
+        input.seekg(star.pos);
         uint64_t buf;
 
         input.read((char*)&buf, sizeof(uint64_t));
-        queue.push({ buf, smallest.pos + sizeof(uint64_t), smallest.max });
+        queue.push({ buf, star.pos + sizeof(uint64_t), star.max });
     }
 }
