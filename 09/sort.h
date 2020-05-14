@@ -49,8 +49,9 @@ void mysort(const std::string& input_path, const std::string& output_path)
     size_t buf_size = 8000000;
 
     std::ifstream input(input_path, std::ios::binary);
-    std::ofstream output(output_path, std::ios::binary);
     std::ofstream tmp("tmp.bin", std::ios::binary);
+    std::ofstream output(output_path, std::ios::binary);
+  
 
     if (!input)
         throw std::runtime_error("Error input file");
@@ -93,8 +94,12 @@ void mysort(const std::string& input_path, const std::string& output_path)
     }
     input.clear();
 
-    while (!queue.empty())
+    while (true)
     {
+        if(queue.empty())
+        {
+            break;
+        }
         auto smallest = queue.top();
         queue.pop();
 
