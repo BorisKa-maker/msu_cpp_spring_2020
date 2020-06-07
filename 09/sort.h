@@ -11,7 +11,7 @@
 
 void sorted(std::ifstream& input, std::ofstream& tmp, size_t buf_size, std::mutex& mut_1, std::mutex& mut_2);
 
-void multi_merge(const std::string& input_path, const std::string& output_path);//мультифазная сортировка слиянием
+void multi_merge(const std::string& input_path, const std::string& output_path);//мультифазное слияние
 
 void star_sort(const std::string& input_path, const std::string& output_path, size_t byf_size);
 
