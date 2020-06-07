@@ -11,16 +11,16 @@
 
 void sorted(std::ifstream& input, std::ofstream& tmp, size_t buf_size, std::mutex& mut_1, std::mutex& mut_2);
 
-void multi_merge(const std::string& input_path, const std::string& output_path);//многофазное слияние(классическое)
+void multi_merge(const std::string& input_path, const std::string& output_path);//РјСѓР»СЊС‚РёС„Р°Р·РЅР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР° СЃР»РёСЏРЅРёРµРј
 
 void star_sort(const std::string& input_path, const std::string& output_path, size_t byf_size);
 
-//Тройка --- минимальный элемент в оставшемся бине, начало отсчета данного элемента в бине, конец бина
+//РўСЂРѕР№РєР° --- РјРёРЅРёРјР°Р»СЊРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІ РѕСЃС‚Р°С‚РєРµ Р±РёРЅР°, РµРіРѕ РјРµСЃС‚Рѕ РІ Р±РёРЅ С„Р°Р№Р»Рµ, РєРѕРЅРµС† Р±РёРЅР°
 class MinEl
 {
 	uint64_t val_;
 	uint64_t curr_;
-	size_t ex_;
+	uint64_t ex_;
 public:
 	MinEl(uint64_t val, size_t curr, size_t ex)
 		:val_(val)
@@ -30,7 +30,7 @@ public:
 
 	}
 
-	size_t my_size() const
+	uint64_t my_size() const
 	{
 		return ex_ - curr_;
 	}
@@ -46,7 +46,7 @@ public:
 	{
 		return curr_;
 	}
-	size_t get_ex() const
+	uint64_t get_ex() const
 	{
 		return ex_;
 	}
