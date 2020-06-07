@@ -66,7 +66,7 @@ void test_2()
 
     for (int64_t i = -Size/2; i < Size/2; i++)
     {
-        uint64_t r = i*i;//âñå êâàäðàòû ïîìåùàþòñÿ â int64_t
+        uint64_t r = i*i;//Ð²ÑÐµ ÐºÐ²Ð°Ð´Ñ€Ð°Ñ‚Ñ‹ Ð¿Ð¾Ð¼ÐµÑ‰Ð°ÑŽÑ‚ÑÑ Ð² int64_t
         ofile.write((char*)&r, sizeof(uint64_t));
     }
     ofile.close();
