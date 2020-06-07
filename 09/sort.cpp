@@ -68,7 +68,7 @@ void multi_merge(const std::string& input_path, const std::string& output_path)
 		{
 			break;
 		}
-		//если остался только один бин --- все остатки записываем в файл
+		//РµСЃР»Рё РѕСЃС‚Р°Р»СЃСЏ РѕРґРёРЅ Р±РёРЅ --- Р·Р°РєРёРґС‹РІР°РµРј РµРіРѕ РІ РєРѕРЅРµС† С„Р°Р№Р»Р°
 		if (vec.size() == 1)
 		{
 			MinEl min = vec[0];
